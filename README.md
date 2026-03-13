@@ -8,36 +8,49 @@ Skriv derfor jeres fælles retningslinjer for punkterne herunder(tilføj gerne f
 
 Beslut, hvordan I vil organisere jeres projekt – struktur for mapper og filer.
 
-- Hvordan organiserer I billeder, fonte og andre ressourcer?
-- Hvor placerer I boilerplate?(fx CSS- og JavaScript-filer, der bruges på tværs af projektet)
-- Hvor placerer I HTML, CSS- og JavaScript-filer til fx detaljevisning og listevisning?
+- Vi holder Farve variabler (og muligvis andre variabler) i variables.css såvel som eksempler på hvordan man benytter fonte.
+- Vi holder global css i en style.css fil, hvor de individuelle sider så hver har en tilhørende .css fil også, til specefik styling.
+- Knapper for også deres egen css fil buttons.css
+
+- css og js filer er holdt i css og js mapper.
+- Billeder vil blive placeret i en img mappe.
 
 ## Navngivning:
 
 Beslutte hvordan i vil navngive filer og mapper for at sikre en ensartet struktur og undgå forvirring.
 
-- Hvordan navngiver I filnavne? (fx små bogstaver, ingen mellemrum, brug af - eller \_)
-- Hvordan sikre I at det er til at forstå hvilke HTML-, CSS- og JavaScript-filer der høre sammen?
+- mapper og filer står alle med småt, og i stedet for mellemrum bruger vi underscore
+``ting_ting.html``
+
+- alle tilhørende css og js filer har samme navn som html filerne. f.eks
+``index.html index.css index.js``
 
 ## Link til scripts:
 
-- Hvor placerer I script referencer i HTML'en? (fx i <head> med defer attribute, eller sidst i <body>)
+script links bliver placeret i head, med defer attrubute
 
 ## Git branches:
 
-- Hvordan navngiver I branches, så alle kan forstår hvem der arbejder i branchen og på hvad?(fx feature-lotte-formular)
+- Vi holder simple navne, alt efter hvad der arbejdes på. F.eks ``opskrifter`` bliver der arbejdet på opskrifter siden
+
+eller ``readme og mappestruktur`` bliver der arbejdet på readme.md og mappestrukturen
 
 ## Arbejdsflow:
 
-- Hvordan fordeler I arbejdet, så I undgår at flere arbejder i de samme filer samtidigt?
-- Hvordan sikrer I, at commit-beskeder er beskrivende?
-- Hvordan kommunikerer i om ændringer i main branchen når feature merges?
+- Vi kommunikere hyppigt med hinanden om hvad vi vær især arbejder på. Og tilføjer også tasks via trello, for at holde overblik over arbejdet. 
+
+- Vi prøver så vidt muligt at gøre commit beskeder beskrivende, så man kan få overblik over hvad der er arbejdet på.
 
 ## Kode:
 
 - Hvordan skriver i funktioner i JavaScript?(fx med function keyword eller som arrow functions)
 - Beslut hvilken CSS selector i benyttes til referener i henholdsvis CSS og JavaScript(fx. id'er til JavaScript og Classes til CSS)
-- Skal filer have korte forklaringer som kommentarer?
+
+- Overordnede funktioner skrives med function keyword, og hvis nødvendigt bruges arrow funktioner inden i, f.eks til at loope over et array eller returneret data fra et API
+
+- CSS selectors bruger vi klasser på generiske ting ligesom knapper, og id til mere specifikke ting, som en specifik sektion i html. Eller et bestemt tekst stykke
+
+- Vi tilføjer kommentare hvis vi mener det vil hjælpe hinanden til at forstå det senere
 
 # Funktionalitet
 
@@ -53,9 +66,14 @@ Brug korte beskrivelser, som i eksemplerne herover
 
 Dette afsnit skal liste de endpoints fra API'et i har benyttet:
 
+### Tilføj her senere !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 - (fx. https://dummyjson.com/products)
 
+
+
 # Dokumentation af Funktion
+
+### Tilføj her senere !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Dette afsnit skal beskrive en funktion I selv har udviklet. Det kunne eksempelvis være en funktion der generere en listen over fx. produkter:
 
