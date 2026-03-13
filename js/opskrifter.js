@@ -8,11 +8,11 @@ console.log(recipesCatalog);
 fetch(`https://dummyjson.com/recipes?&limit=100`).then((res) =>
   res.json().then((data) => {
     theData = data.recipes;
-    showProducts(theData);
+    showRecipes(theData);
   }),
 );
 
-function showProducts(dataArr) {
+function showRecipes(dataArr) {
   recipesCatalog.innerHTML = `
   <h2>Alle opskrifter</h2>
   <h3>0 - 30 min</h3>
@@ -50,5 +50,5 @@ function showProducts(dataArr) {
 function filterCuisine(cuisines) {
   const filtered = theData.filter((recipe) => cuisines.includes(recipe.cuisine));
 
-  showProducts(filtered);
+  showRecipes(filtered);
 }

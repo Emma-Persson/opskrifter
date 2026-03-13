@@ -75,20 +75,72 @@ Dette afsnit skal liste de endpoints fra API'et i har benyttet:
 
 # Dokumentation af Funktion
 
-### Tilføj her senere !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2 funktioner i ``opskrifter.js`` bliver brugt til at vise opskrifter
 
-Dette afsnit skal beskrive en funktion I selv har udviklet. Det kunne eksempelvis være en funktion der generere en listen over fx. produkter:
+showRecipes tager et data array fra api'et som en variabel. Putter Html ind på forsiden ved hjælp af en querySelector der er lavet i roden af js filen.
 
-- Beskrivelse: Hvad gør funktionen? Hvordan spiller den sammen med resten af koden?
-- Parametre: Hvilke input forventes (fx en værdi fra en dropdown eller URL'en)?
-- Returnerer: Beskriv, om funktionen returnerer en værdi eller blot manipulerer DOM’en.
-- Eksempel på brug: Indsæt funktions-koden herunder(der hvor koden er i eksemplet) og vis, hvordan funktionen kaldes:
+Og looper så igennem data arrayet fra variablen og tilføjer html med opskrifts information for hver at dataerne i arrayet.
+
+Til sidst bliver der også tilføjet event listeners til en række knapper. Med individuelle filtrer. Der hvis klikket så kalder showRecipes funktionen igen, men med nyt data
 
 ```javascript
-//funktionens kode:
-function voresFunktion(sprog) {
-  console.log(`${sprog} syntax highlighting`);
+  //Funktion kode:
+  function showRecipes(dataArr) {
+  recipesCatalog.innerHTML = `
+  <h2>Alle opskrifter</h2>
+  <h3>0 - 30 min</h3>
+  <section>
+    <h5>filtrer:</h5>
+    <div>
+      <button class="european">European</button>
+      <button class="asian">East & South-East Asian</button>
+      <button class="mediterranean">Mediterranean & Middle Eastern</button>
+      <button class="southasian">South Asian</button>
+      <button class="american">North and Latin American</button>
+    </div>
+  </section>
+  <section id="recipesList" class="grid_1-1-1"></section>
+  `;
+  const recipesList = document.querySelector("#recipesList");
+  dataArr.forEach((recipes) => {
+    recipesList.innerHTML += `<div>
+          <img src="https://cdn.dummyjson.com/recipe-images/${recipes.id}.webp" alt="" />
+          <h4>${recipes.name}</h4>
+          <p>Tid: ${recipes.cookTimeMinutes + recipes.prepTimeMinutes} minutter</p>
+          <div><button class="difficulty ${recipes.difficulty.toLowerCase()}">${recipes.difficulty}</button><button class="cuisine ${recipes.cuisine.toLowerCase().replace(" ", "-")}">${recipes.cuisine}</button></div>
+          <button class="read-more">Read More</button>
+        </div>`;
+    console.log(`${recipes.cookTimeMinutes + recipes.prepTimeMinutes}`);
+  });
+
+  document.querySelector(".asian").addEventListener("click", () => filterCuisine(["Asian", "Japanese", "Korean", "Thai", "Vietnamese"]));
+  document.querySelector(".european").addEventListener("click", () => filterCuisine(["Italian", "Spanish", "Russian", "French"]));
+  document.querySelector(".mediterranean").addEventListener("click", () => filterCuisine(["Greek", "Turkish", "Lebanese", "Moroccan", "Mediterranean"]));
+  document.querySelector(".southasian").addEventListener("click", () => filterCuisine(["Indian", "Pakistani"]));
+  document.querySelector(".american").addEventListener("click", () => filterCuisine(["American", "Mexican", "Brazilian", "Cuban", "Hawaiian"]));
 }
-//hvordan funktionen kaldes:
-voresFunktion("JavaScript");
+
+//Hvordan funktionen kaldes
+fetch(`https://dummyjson.com/recipes?&limit=100`).then((res) =>
+  res.json().then((data) => {
+    theData = data.recipes;
+    showRecipes(theData);
+  }),
+);
+```
+
+filterCuisine tager et array af kategorier, og laver så en const ud fra vores eksisterende apidata. Med et filter ud fra det kategori array som var brugt som variabel
+
+den konst bruger den så til at kalde showRecipes igen, med med mere specifik data
+
+```javascript
+//funktionens kode
+function filterCuisine(cuisines) {
+  const filtered = theData.filter((recipe) => cuisines.includes(recipe.cuisine));
+
+  showRecipes(filtered);
+}
+
+//Hvordan funktionen kaldes
+filterCuisine(["Asian", "Japanese", "Korean", "Thai", "Vietnamese"]);
 ```
