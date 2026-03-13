@@ -75,6 +75,9 @@ p {
     font-size: 24px;
     font-family: "Quicksand", sans-serif;
   }
+  nav li a {
+    font-size: 32px;
+  }
 }
 
 @media (min-width: 780px) {
@@ -86,8 +89,32 @@ p {
   }
 }
 
+/* header */
 header {
-  nav {
-    background-color: var(--main-color);
-  }
+  text-align: center;
+}
+body {
+  margin: 0;
+}
+header nav {
+  background-color: var(--main-color);
+}
+header a {
+  color: var(--bg-color);
+  font-family: "Quicksand", sans-serif;
+  font-size: 24px;
+}
+header li {
+  display: inline-block;
+  padding: 1rem 2rem;
+}
+h1 {
+  display: inline-block;
+  color: var(--main-color);
+  text-align: center;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
 }
