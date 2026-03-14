@@ -31,6 +31,7 @@ function showRecipes(dataArr) {
   recipesCatalog.innerHTML = `
   <h2>Alle opskrifter</h2>
   <h3>0 - 30 min</h3>
+  <button class="back_btn"> &#8592</button>
   <section>
     <h5>filtrer:</h5>
     <div>
@@ -43,16 +44,22 @@ function showRecipes(dataArr) {
   </section>
   <section id="recipesList" class="grid_1-1-1"></section>
   `;
+  document.querySelector(".back_btn").addEventListener("click", goBack);
+  function goBack() {
+    history.back();
+    console.log("go back");
+  }
+
   const recipesList = document.querySelector("#recipesList");
   dataArr.forEach((recipes) => {
-    recipesList.innerHTML += `<div class="card">
+    recipesList.innerHTML += `<article class="card">
           <img src="https://cdn.dummyjson.com/recipe-images/${recipes.id}.webp" alt="" />
           <h4>${recipes.name}</h4>
           <p>Tid: ${recipes.cookTimeMinutes + recipes.prepTimeMinutes} minutter</p>
           <p> ${recipes.rating}<span class="yellow"> ⭑</span></p>
           <div><button class="difficulty ${recipes.difficulty.toLowerCase()}">${recipes.difficulty}</button><button class="cuisine ${recipes.cuisine.toLowerCase().replace(" ", "-")}">${recipes.cuisine}</button></div>
-          <button class="readMore">Read More  &#8594 </button>
-        </div>`;
+          <button class="readMore"> <a href="enkelt_opskrift.html?id=${recipes.id}">Read More &#8594</a></button>
+        </article>`;
     console.log(`${recipes.cookTimeMinutes + recipes.prepTimeMinutes}`);
   });
 
