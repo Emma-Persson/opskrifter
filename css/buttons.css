@@ -117,7 +117,7 @@ button.cuisine {
 }
 button.readMore {
   border-radius: 20px;
-  border: 1px var(--main-color) solid;
+  border: 3px var(--main-color) solid;
   color: var(--main-color);
   background-color: var(--bg-color);
   font-size: 20px;
@@ -169,7 +169,7 @@ button.hawaiian {
   color: var(--american-main);
 }
 
-.ratingCard button.readMore {
+button.readMore {
   border-radius: 20px;
   border: 3px solid var(--main-color);
   background-color: var(--bg-color);
