@@ -1,0 +1,76 @@
+#ratingsContainer {
+  margin: 1.5em;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1em;
+  .cardInformation {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 2em;
+    .yellow {
+      color: var(--stars);
+    }
+  }
+  .flexContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+.heroSection {
+  margin: 0;
+  img {
+    width: 100%;
+  }
+}
+#categoryContainer {
+  padding: 0;
+  section:nth-child(2) {
+    margin: 1.5em;
+  }
+}
+.ratingCard {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 5;
+  gap: 0.2rem;
+}
+
+#categoryList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5em;
+  margin: 1.5em 0;
+  a {
+    border: 3px solid var(--main-color);
+    border-radius: 20px;
+    color: var(--main-color);
+    padding: 0.2rem 0.1rem;
+  }
+  a:hover {
+    background-color: var(--botton-hover);
+  }
+}
+
+@media (min-width: 780px) {
+  #categoryList a {
+    padding: 0.5rem 2rem;
+  }
+
+  #categoryList a:hover {
+    background-color: var(--botton-hover);
+  }
+
+  #ratingsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+
+    h3 {
+      grid-column: 1/-1;
+    }
+  }
+}

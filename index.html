@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <script src="js/index.js" defer></script>
     <title>Forside</title>
   </head>
@@ -25,7 +26,7 @@
         </ul>
       </nav>
     </header>
-    <main>
+    <main id="categoryContainer">
       <section class="heroSection">
         <img src="imgs/hero.webp" alt="hero billede" />
       </section>
@@ -36,46 +37,14 @@
           You can browse meals based on how long they take to prepare, whether you need something fast or have more time to cook. You can also explore recipes from different cuisines such as European, American, or Asian, making it easy to find tasty
           dishes the whole family will love.
         </p>
-        <div id="categoryContainer">
+        <div id="categoryList">
           <a href="opskrifter.html"> 0 - 30 min → </a>
           <a href="opskrifter.html"> 30 - 60 min → </a>
           <a href="opskrifter.html"> + 60 min → </a>
         </div>
       </section>
 
-      <section id="ratingsContainer">
-        <h3>Best Ratings</h3>
-        <div class="ratingCard">
-          <img src="" alt="food picture" />
-          <h4></h4>
-          <div class="cardInformation">
-            <p>Time: minutes</p>
-            <p><span class="yellow"> ⭑</span></p>
-          </div>
-          <div><button class="difficulty"></button><button class="cuisine"></button></div>
-          <button><a href=""> Read More → </a></button>
-        </div>
-        <div class="ratingCard">
-          <img src="" alt="food picture" />
-          <h4></h4>
-          <div class="cardInformation">
-            <p>Time: minutes</p>
-            <p><span class="yellow"> ⭑</span></p>
-          </div>
-          <div><button class="difficulty"></button><button class="cuisine"></button></div>
-          <button><a href=""> Read More → </a></button>
-        </div>
-        <div class="ratingCard">
-          <img src="" alt="food picture" />
-          <h4></h4>
-          <div class="cardInformation">
-            <p>Time: minutes</p>
-            <p><span class="yellow"> ⭑</span></p>
-          </div>
-          <div><button class="difficulty"></button><button class="cuisine"></button></div>
-          <button><a href=""> Read More → </a></button>
-        </div>
-      </section>
+      <section id="ratingsContainer"></section>
     </main>
     <footer>
       <h1>HappyFood</h1>
