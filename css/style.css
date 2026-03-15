@@ -26,16 +26,19 @@ body {
 h1 {
   font-family: "Gloria Hallelujah", cursive;
   font-size: 40px;
+  color: var(--main-color);
 }
 
 h2 {
   font-family: "Gloria Hallelujah", cursive;
   font-size: 30px;
+  color: var(--main-color);
 }
 
 h3 {
   font-family: "Quicksand", sans-serif;
   font-size: 22px;
+  color: var(--secondary-color);
 }
 h4 {
   font-family: "Quicksand", sans-serif;
@@ -51,20 +54,30 @@ p {
   font-size: 15px;
   margin: 0;
 }
+nav li a {
+  font-size: 20px;
+}
+a {
+  font-family: "Quicksand", sans-serif;
+  font-size: 20px;
+}
 @media (min-width: 780px) {
   h1 {
     font-family: "Gloria Hallelujah", cursive;
     font-size: 64px;
+    color: var(--main-color);
   }
 
   h2 {
     font-family: "Gloria Hallelujah", cursive;
     font-size: 48px;
+    color: var(--main-color);
   }
 
   h3 {
     font-size: 40px;
     font-family: "Quicksand", sans-serif;
+    color: var(--secondary-color);
   }
   h4 {
     font-size: 32px;
@@ -77,6 +90,10 @@ p {
     margin: 0.6rem;
   }
   nav li a {
+    font-size: 32px;
+  }
+  a {
+    font-family: "Quicksand", sans-serif;
     font-size: 32px;
   }
 }

@@ -90,8 +90,8 @@ button.southasian.active {
 button.easy {
   border-radius: 20px;
   border: 1px var(--difficulty-easy) solid;
-  color: var(--bg-color);
-  background-color: var(--difficulty-easy);
+  color: var(--difficulty-easy);
+  background-color: var(--bg-color);
   font-size: 14px;
 }
 button.medium {
@@ -167,4 +167,17 @@ button.cuban,
 button.hawaiian {
   border: 1px var(--american-main) solid;
   color: var(--american-main);
+}
+
+.ratingCard button.readMore {
+  border-radius: 20px;
+  border: 3px solid var(--main-color);
+  background-color: var(--bg-color);
+  a {
+    color: var(--main-color);
+  }
+}
+
+button.readMore:hover {
+  background-color: var(--button-hover);
 }
