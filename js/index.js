@@ -12,7 +12,7 @@ fetch(`https://dummyjson.com/recipes?limit=3&sortBy=rating&order=desc`).then((re
 );
 
 function showProducts(dataArr) {
-  ratingsContainer.innerHTML = "";
+  ratingsContainer.innerHTML = `<h3>Best Ratings</h3>`;
   dataArr.forEach((recipes) => {
     ratingsContainer.innerHTML += `<div class="ratingCard">
           <img src="https://cdn.dummyjson.com/recipe-images/${recipes.id}.webp" alt="food picture" />

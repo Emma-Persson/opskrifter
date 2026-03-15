@@ -49,4 +49,7 @@
   --asian-secondary: #abcbad;
   --american-main: #f6744b;
   --american-secondary: #fbb9a5;
+
+  /* Hover */
+  --button-hover: #e8a9a9;
 }
