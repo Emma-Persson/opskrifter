@@ -45,7 +45,7 @@ h5 {
   font-family: "Quicksand", sans-serif;
   font-size: 18px;
 }
-p {
+p,li {
   font-family: "Quicksand", sans-serif;
   font-size: 15px;
 }
@@ -68,22 +68,29 @@ p {
     font-size: 32px;
     font-family: "Quicksand", sans-serif;
   }
-  p {
+  p,li {
     font-size: 24px;
     font-family: "Quicksand", sans-serif;
   }
   nav li a {
     font-size: 32px;
   }
-}
+  a {
+    font-family: "Quicksand", sans-serif;
+    font-size: 32px;
+  }
 
-@media (min-width: 780px) {
   .grid_1-1-1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 2rem;
   }
+}
+
+/* Extra */
+.star{
+  color: var(--stars);
 }
 
 /* header */
