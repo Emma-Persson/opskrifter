@@ -1,0 +1,42 @@
+main{
+	ul,ol{
+	  padding: 1em 3em;
+	}
+}
+
+h2,h3{
+	&.american{
+		color: var(--american-main);
+	}
+	&.european{
+		color: var(--european-main);
+	}
+	&.mediterranean{
+		color: var(--mediterranean-main);
+	}
+	&.south-asian{
+		color: var(--south-asian-main);
+	}
+	&.asian{
+		color: var(--asian-main);
+	}
+
+}
+
+ul,ol{
+	&.american{
+		background-color: var(--american-secondary);
+	}
+	&.european{
+		background-color: var(--european-secondary);
+	}
+	&.mediterranean{
+		background-color: var(--mediterranean-secondary);
+	}
+	&.south-asian{
+		background-color: var(--south-asian-secondary);
+	}
+	&.asian{
+		background-color: var(--asian-secondary);
+	}
+}

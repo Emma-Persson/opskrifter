@@ -2,7 +2,6 @@
 let theData;
 
 const ratingsContainer = document.querySelector("#ratingsContainer");
-console.log(ratingsContainer);
 
 fetch(`https://dummyjson.com/recipes?limit=3&sortBy=rating&order=desc`).then((res) =>
   res.json().then((data) => {
