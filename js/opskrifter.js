@@ -1,57 +1,61 @@
 ("use strict");
 
-let theData;
+//Brug til at retunere en parametre fra urlen
+const url_param_get = (key) => {
+  const url = new URL(window.location);
+  return url.searchParams.get(key);
+}
 
+//Brug til at sætte en parameter i urlen, key er navnet på parametren, value er hvad den indenholder
+const url_param = (key,value) => {
+  const url = new URL(window.location);
+  url.searchParams.set(key, value);
+  window.history.pushState({}, '', url);
+}
+
+const recipesList = document.querySelector("#recipesList");
+const timeFilter = document.querySelector("#timeFilter");
+
+document.querySelector(".back_btn").addEventListener("click", () => {
+  history.back();
+});
+
+document.querySelector(".eastandsoutheastasian").addEventListener("click", () => {
+  url_param("cuisine","eastandsoutheastasian")
+  filterCuisine();
+});
+document.querySelector(".european").addEventListener("click", () => {
+  url_param("cuisine","european")
+  filterCuisine();
+});
+document.querySelector(".mediterraneanandmiddleeastern").addEventListener("click", () => {
+  url_param("cuisine","mediterraneanandmiddleeastern")
+  filterCuisine();
+});
+document.querySelector(".southasian").addEventListener("click", () => {
+  url_param("cuisine","southasian")
+  filterCuisine();
+});
+document.querySelector(".northandlatinamerican").addEventListener("click", () => {
+  url_param("cuisine","northandlatinamerican")
+  filterCuisine();
+});
+
+let theData;
+const time = url_param_get("time");
 const recipesCatalog = document.querySelector("#recipesCatalog");
-console.log(recipesCatalog);
 
 fetch(`https://dummyjson.com/recipes?&limit=100`).then((res) =>
   res.json().then((data) => {
     theData = data.recipes;
-
-    const params = new URLSearchParams(window.location.search);
-    let cuisine = params.get("cuisine");
-    if (cuisine === "eastandsoutheastasian") {
-      filterCuisine(["Asian", "Japanese", "Korean", "Thai", "Vietnamese"]);
-    } else if (cuisine === "european") {
-      filterCuisine(["Italian", "Spanish", "Russian", "French"]);
-    } else if (cuisine === "mediterraneanandmiddleeastern") {
-      filterCuisine(["Greek", "Turkish", "Lebanese", "Moroccan", "Mediterranean"]);
-    } else if (cuisine === "southasian") {
-      filterCuisine(["Indian", "Pakistani"]);
-    } else if (cuisine === "northandlatinamerican") {
-      filterCuisine(["American", "Mexican", "Brazilian", "Cuban", "Hawaiian"]);
-    } else {
-      showRecipes(theData);
-    }
-  }),
+    filterCuisine();
+  })
 );
 
-function showRecipes(dataArr) {
-  recipesCatalog.innerHTML = `
-  <h2>Alle opskrifter</h2>
-  <h3>0 - 30 min</h3>
-  <button class="back_btn"> &#8592</button>
-  <section>
-    <h5>filtrer:</h5>
-    <div>
-      <button class="european">European</button>
-      <button class="eastandsoutheastasian">East & South-East Asian</button>
-      <button class="mediterraneanandmiddleeastern">Mediterranean & Middle Eastern</button>
-      <button class="southasian">South Asian</button>
-      <button class="northandlatinamerican">North and Latin American</button>
-    </div>
-  </section>
-  <section id="recipesList" class="grid_1-1-1"></section>
-  `;
-  document.querySelector(".back_btn").addEventListener("click", goBack);
-  function goBack() {
-    history.back();
-    console.log("go back");
-  }
-
-  const recipesList = document.querySelector("#recipesList");
-  dataArr.forEach((recipes) => {
+function showRecipes(arrayData) {
+  
+  recipesList.innerHTML = "";
+  arrayData.forEach((recipes) => {
     recipesList.innerHTML += `<article class="card">
           <img src="https://cdn.dummyjson.com/recipe-images/${recipes.id}.webp" alt="" />
           <h4>${recipes.name}</h4>
@@ -61,27 +65,63 @@ function showRecipes(dataArr) {
           <button class="readMore"> <a href="enkelt_opskrift.html?id=${recipes.id}">Read More &#8594</a></button>
         </article>`;
   });
+}
 
-  document.querySelector(".eastandsoutheastasian").addEventListener("click", () => (window.location.href = "opskrifter.html?cuisine=eastandsoutheastasian"));
-  document.querySelector(".european").addEventListener("click", () => (window.location.href = "opskrifter.html?cuisine=european"));
-  document.querySelector(".mediterraneanandmiddleeastern").addEventListener("click", () => (window.location.href = "opskrifter.html?cuisine=mediterraneanandmiddleeastern"));
-  document.querySelector(".southasian").addEventListener("click", () => (window.location.href = "opskrifter.html?cuisine=southasian"));
-  document.querySelector(".northandlatinamerican").addEventListener("click", () => (window.location.href = "opskrifter.html?cuisine=northandlatinamerican"));
+function filterCuisine() {
+  const cuisine_tag = url_param_get("cuisine");
+  const time_tag = url_param_get("time");
 
-  const params = new URLSearchParams(window.location.search);
-  const cuisine = params.get("cuisine");
+  let filtered = theData;
 
-  if (cuisine) {
-    const activeButton = document.querySelector("." + CSS.escape(cuisine));
+  //Filtrere på tid hvis det er en parametrer der er med
+  if(time_tag){
+
+    if(time_tag == "30"){
+      timeFilter.innerHTML = "0 - 30min";
+    }
+    else if(time_tag == "60"){
+      timeFilter.innerHTML = "30 - 60min";
+    }
+    else if(time_tag == "60plus"){
+      timeFilter.innerHTML = "+ 60 min";
+    }
+
+    filtered = filtered.filter((recipe) => {
+      let make_time = recipe.prepTimeMinutes + recipe.cookTimeMinutes;
+
+      if(time_tag == "30"){
+        return make_time <= 30;
+      }
+      else if(time_tag == "60"){
+        return make_time <= 60;
+      }
+      else if(time_tag == "60plus"){
+        return make_time >= 60;
+      }
+    });
+  }
+
+  //Filtrere på cuisine tag hvis det er sat
+  if (cuisine_tag){
+    const activeButton = document.querySelector("." + CSS.escape(cuisine_tag));
     if (activeButton) {
       document.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
       activeButton.classList.add("active");
     }
+  
+    let cuisines
+
+    if (cuisine_tag === "eastandsoutheastasian") cuisines = ["Asian", "Japanese", "Korean", "Thai", "Vietnamese"];
+    else if (cuisine_tag === "european") cuisines = ["Italian", "Spanish", "Russian", "French"];
+    else if (cuisine_tag === "mediterraneanandmiddleeastern") cuisines = ["Greek", "Turkish", "Lebanese", "Moroccan", "Mediterranean"];
+    else if (cuisine_tag === "southasian") cuisines = ["Indian", "Pakistani"];
+    else if (cuisine_tag === "northandlatinamerican") cuisines = ["American", "Mexican", "Brazilian", "Cuban", "Hawaiian"];
+
+    filtered = filtered.filter((recipe) => cuisines.includes(recipe.cuisine));
+
+    showRecipes(filtered);
+
+  } else {
+    showRecipes(filtered);
   }
-}
-
-function filterCuisine(cuisines) {
-  const filtered = theData.filter((recipe) => cuisines.includes(recipe.cuisine));
-
-  showRecipes(filtered);
 }

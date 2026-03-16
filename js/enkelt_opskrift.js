@@ -26,10 +26,18 @@ const single_recipe_element = document.querySelector("#singleRecipe");
 //Kører når siden er loadet
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const recipe = await api_get(`/${recipe_id}`);
+  const recipe = await api_get(`/${recipe_id}`); 
+
+	let cuisine_class
+
+	if(["Asian", "Japanese", "Korean", "Thai", "Vietnamese"].includes(recipe.cuisine)) cuisine_class = "asian";
+	if(["Italian", "Spanish", "Russian", "French"].includes(recipe.cuisine)) cuisine_class = "european";
+	if(["Greek", "Turkish", "Lebanese", "Moroccan", "Mediterranean"].includes(recipe.cuisine)) cuisine_class = "mediterranean";
+	if(["Indian", "Pakistani"].includes(recipe.cuisine)) cuisine_class = "south-asian";
+	if(["American", "Mexican", "Brazilian", "Cuban", "Hawaiian"].includes(recipe.cuisine)) cuisine_class = "american";
 
 	let opskrift_html = `
-		<h2>${recipe.name}</h2>
+		<h2 class="${cuisine_class}">${recipe.name}</h2>
 		<section>
 		<div><button class="difficulty ${recipe.difficulty.toLowerCase()}">${recipe.difficulty}</button><button class="cuisine ${recipe.cuisine.toLowerCase().replace(" ", "-")}">${recipe.cuisine}</button></div>
 		<img src="${recipe.image}" alt="${recipe.name}">
@@ -42,14 +50,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 		</div>
 		</section>
 		<section>
-			<h3>Ingredienser:</h3>
-			<ul>
+			<h3 class="${cuisine_class}">Ingredienser:</h3>
+			<ul class="${cuisine_class}">
 				${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
 			</ul>
 		</section>
 		<section>
-			<h3>Fremgangsmåde:</h3>
-			<ol>
+			<h3 class="${cuisine_class}">Fremgangsmåde:</h3>
+			<ol class="${cuisine_class}">
 				${recipe.instructions.map(inst => `<li>${inst}</li>`).join('')}
 			</ol>
 		</section>
