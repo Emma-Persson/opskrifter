@@ -1,16 +1,16 @@
 ("use strict");
 
-//Brug til at retunere en parametre fra urlen
-const url_param_get = (key) => {
-  const url = new URL(window.location);
-  return url.searchParams.get(key);
-}
-
 //Brug til at sætte en parameter i urlen, key er navnet på parametren, value er hvad den indenholder
-const url_param = (key,value) => {
+function url_param (key,value) {
   const url = new URL(window.location);
   url.searchParams.set(key, value);
   window.history.pushState({}, '', url);
+}
+
+//Brug til at retunere en parametre fra urlen
+function url_param_get (key) {
+  const url = new URL(window.location);
+  return url.searchParams.get(key);
 }
 
 const recipesList = document.querySelector("#recipesList");

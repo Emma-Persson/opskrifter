@@ -2,19 +2,19 @@ const api = "https://dummyjson.com/recipes";
 
 //brug en endpoint. f.eks /1 for at få recipe nr1
 //eller /tags for at få alle tags. Retunere json
-const api_get = (endpoint) => {
+function api_get(endpoint) {
   return fetch(api + endpoint).then((res) => res.json());
 }
 
 //Brug til at sætte en parameter i urlen, key er navnet på parametren, value er hvad den indenholder
-const url_param = (key,value) => {
+function url_param (key,value) {
   const url = new URL(window.location);
   url.searchParams.set(key, value);
   window.history.pushState({}, '', url);
 }
 
 //Brug til at retunere en parametre fra urlen
-const url_param_get = (key) => {
+function url_param_get (key) {
   const url = new URL(window.location);
   return url.searchParams.get(key);
 }
