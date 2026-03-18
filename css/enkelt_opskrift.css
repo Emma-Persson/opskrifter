@@ -40,3 +40,10 @@ ul,ol{
 		background-color: var(--asian-secondary);
 	}
 }
+@media (min-width: 1200px) {
+	.recipe-align{
+		display: flex;
+		flex-direction: row-reverse;
+    gap: 2rem;
+	}
+}

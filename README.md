@@ -54,93 +54,45 @@ eller ``readme og mappestruktur`` bliver der arbejdet på readme.md og mappestru
 
 # Funktionalitet
 
-Dette afsnit skal forklare hvad I konkret har arbejde med, for at udvikle websitet. Tænk over hvilke interaktioner brugeren kan foretage på sitet? Eller hvordan websitet håndterer og præsenterer data? Eksempler på funktionalitet, der kan beskrives:
-
-- Hentning af produkter fra API.
-- Filtrering af produkter baseret på brugerens valg.
-- Dynamisk visning af produkter i HTML.
-
-Brug korte beskrivelser, som i eksemplerne herover
-
-### Tilføj her senere !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- Henting af opskrifter fra API.
+- Henting af specifik opskrift fra API med ID.
+- Benyttelse af url parametre, når man navigere til og fra sider
+- Filtering af opskrifter, ud fra tags, og prep+cook time
+- Live opdatering af side alt efter hvilke kategorier man vælger
 
 # API endpoints
-
-Dette afsnit skal liste de endpoints fra API'et i har benyttet:
-
-### Tilføj her senere !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-- (fx. https://dummyjson.com/products)
-
+Endpoints benyttet
+https://dummyjson.com/recipes
+https://dummyjson.com/recipes/id
+https://dummyjson.com/recipes-images/id.webp
 
 
 # Dokumentation af Funktion
 
-2 funktioner i ``opskrifter.js`` bliver brugt til at vise opskrifter
+url_param  i ``opskrifter.js`` brugers til at sætte en specifik url parameter til en specifik value.
 
-showRecipes tager et data array fra api'et som en variabel. Putter Html ind på forsiden ved hjælp af en querySelector der er lavet i roden af js filen.
+```js
+  function url_param (key,value) {
+    const url = new URL(window.location);
+    url.searchParams.set(key, value);
+    window.history.pushState({}, '', url); //tilføjer til browserens history stack (når man clicker tilbage, bliver den variabel der var sat fjernet igen)
+  }
 
-Og looper så igennem data arrayet fra variablen og tilføjer html med opskrifts information for hver at dataerne i arrayet.
-
-Til sidst bliver der også tilføjet event listeners til en række knapper. Med individuelle filtrer. Der hvis klikket så kalder showRecipes funktionen igen, men med nyt data
-
-```javascript
-  //Funktion kode:
-  function showRecipes(dataArr) {
-  recipesCatalog.innerHTML = `
-  <h2>Alle opskrifter</h2>
-  <h3>0 - 30 min</h3>
-  <section>
-    <h5>filtrer:</h5>
-    <div>
-      <button class="european">European</button>
-      <button class="asian">East & South-East Asian</button>
-      <button class="mediterranean">Mediterranean & Middle Eastern</button>
-      <button class="southasian">South Asian</button>
-      <button class="american">North and Latin American</button>
-    </div>
-  </section>
-  <section id="recipesList" class="grid_1-1-1"></section>
-  `;
-  const recipesList = document.querySelector("#recipesList");
-  dataArr.forEach((recipes) => {
-    recipesList.innerHTML += `<div>
-          <img src="https://cdn.dummyjson.com/recipe-images/${recipes.id}.webp" alt="" />
-          <h4>${recipes.name}</h4>
-          <p>Tid: ${recipes.cookTimeMinutes + recipes.prepTimeMinutes} minutter</p>
-          <div><button class="difficulty ${recipes.difficulty.toLowerCase()}">${recipes.difficulty}</button><button class="cuisine ${recipes.cuisine.toLowerCase().replace(" ", "-")}">${recipes.cuisine}</button></div>
-          <button class="read-more">Read More</button>
-        </div>`;
-    console.log(`${recipes.cookTimeMinutes + recipes.prepTimeMinutes}`);
-  });
-
-  document.querySelector(".asian").addEventListener("click", () => filterCuisine(["Asian", "Japanese", "Korean", "Thai", "Vietnamese"]));
-  document.querySelector(".european").addEventListener("click", () => filterCuisine(["Italian", "Spanish", "Russian", "French"]));
-  document.querySelector(".mediterranean").addEventListener("click", () => filterCuisine(["Greek", "Turkish", "Lebanese", "Moroccan", "Mediterranean"]));
-  document.querySelector(".southasian").addEventListener("click", () => filterCuisine(["Indian", "Pakistani"]));
-  document.querySelector(".american").addEventListener("click", () => filterCuisine(["American", "Mexican", "Brazilian", "Cuban", "Hawaiian"]));
-}
-
-//Hvordan funktionen kaldes
-fetch(`https://dummyjson.com/recipes?&limit=100`).then((res) =>
-  res.json().then((data) => {
-    theData = data.recipes;
-    showRecipes(theData);
-  }),
-);
+  //hvordan funktionen kaldes
+  url_param("cuisine","european"); //sætter variablen  cuisine, til at være european, som så kan hentes igen og bruges til filtering
 ```
 
-filterCuisine tager et array af kategorier, og laver så en const ud fra vores eksisterende apidata. Med et filter ud fra det kategori array som var brugt som variabel
+url_param_get bruges til at få en specifik url parameter fra urlet.
+Den returnere en streng, udfra hvilken parameter der var brugt til at kalde funktionen
 
-den konst bruger den så til at kalde showRecipes igen, med med mere specifik data
+```js
+  //Brug til at retunere en parametre fra urlen
+  function url_param_get (key) {
+    const url = new URL(window.location);
+    return url.searchParams.get(key);
+  }
 
-```javascript
-//funktionens kode
-function filterCuisine(cuisines) {
-  const filtered = theData.filter((recipe) => cuisines.includes(recipe.cuisine));
-
-  showRecipes(filtered);
-}
-
-//Hvordan funktionen kaldes
-filterCuisine(["Asian", "Japanese", "Korean", "Thai", "Vietnamese"]);
+  //hvordan funktionen kaldes
+  let cuisine = url_param_get("cuisine");
+  //cuisine ville være "european" efter url_param var brugt
 ```

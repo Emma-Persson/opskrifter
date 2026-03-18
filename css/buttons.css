@@ -87,38 +87,45 @@ button.southasian.active {
   background-color: var(--south-asian-main);
   color: var(--bg-color);
 }
-button.easy {
+
+button.easy, button.medium, button.hard, button.cuisine{
   border-radius: 20px;
-  border: 2px var(--difficulty-easy) solid;
-  color: var(--difficulty-easy);
-  background-color: var(--bg-color);
   font-size: 14px;
-  font-weight: bold;
+  font-weight: bold;  
+  color: white;
+  border: 0px;
+  padding: 0.5em;
+}
+
+button.easy {
+  background-color: var(--difficulty-easy);
 }
 button.medium {
-  border-radius: 20px;
-  border: 2px var(--difficulty-medium) solid;
-  color: var(--difficulty-medium);
-  background-color: var(--bg-color);
-  font-size: 14px;
-  font-weight: bold;
+  background-color: var(--difficulty-medium);
 }
 button.hard {
-  border-radius: 20px;
-  border: 2px var(--difficulty-hard) solid;
-  color: var(--difficulty-hard);
-  background-color: var(--bg-color);
-  font-size: 14px;
-  font-weight: bold;
+  background-color: var(--difficulty-hard);
 }
 button.cuisine {
-  border-radius: 20px;
-  border: 2px var(--european-main) solid;
-  color: var(--european-main);
-  background-color: var(--bg-color);
-  font-size: 14px;
-  font-weight: bold;
+  background-color: var(--european-main);
 }
+
+button.japanese, button.korean, button.thai, button.vietnamese, button.asian {
+  background-color: var(--asian-main);
+}
+button.italian, button.french, button.spanish{
+  background-color: var(--european-main);
+}
+button.greek, button.turkish, button.lebanese, button.moroccan, button.mediterranean {
+  background-color: var(--mediterranean-main);
+}
+button.indian, button.pakistani {
+  background-color: var(--south-asian-main);
+}
+button.american, button.mexican, button.brazilian, button.cuban, button.hawaiian {
+  background-color: var(--american-main);
+}
+
 button.readMore {
   border-radius: 20px;
   border: 3px var(--main-color) solid;
@@ -139,39 +146,6 @@ button.readMore:hover {
 .readMore:hover a {
   color: var(--bg-color);
 }
-button.japanese,
-button.korean,
-button.thai,
-button.vietnamese,
-button.asian {
-  border-color: var(--asian-main);
-  color: var(--asian-main);
-}
-button.italian button.french button.spanish button.european {
-  border-color: var(--european-main);
-  color: var(--european-main);
-}
-button.greek,
-button.turkish,
-button.lebanese,
-button.moroccan,
-button.mediterranean {
-  border-color: var(--mediterranean-main);
-  color: var(--mediterranean-main);
-}
-button.indian,
-button.pakistani {
-  border-color: var(--south-asian-main);
-  color: var(--south-asian-main);
-}
-button.american,
-button.mexican,
-button.brazilian,
-button.cuban,
-button.hawaiian {
-  border-color: var(--american-main);
-  color: var(--american-main);
-}
 
 button.readMore {
   border-radius: 20px;
@@ -180,6 +154,8 @@ button.readMore {
   a {
     color: var(--main-color);
   }
+
+  margin-top: 1em;
 }
 
 button.readMore:hover {

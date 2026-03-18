@@ -18,7 +18,7 @@ function showProducts(dataArr) {
           <h4>${recipes.name}</h4>
           <div class="cardInformation">
             <p>Time: ${recipes.cookTimeMinutes + recipes.prepTimeMinutes} minutes</p>
-            <p> ${recipes.rating}<span class="yellow">★</span></p>
+            <p> ${recipes.rating}<span class="star">★</span></p>
           </div>
           <div class="flexContainer"><button class="difficulty ${recipes.difficulty.toLowerCase()}">${recipes.difficulty}</button><button class="cuisine ${recipes.cuisine.toLowerCase().replace(" ", "-")}">${recipes.cuisine}</button></div>
           <button class="readMore"><a href="enkelt_opskrift.html?id=${recipes.id}"> Read More → </a></button>

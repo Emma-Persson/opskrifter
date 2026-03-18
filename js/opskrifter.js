@@ -1,16 +1,16 @@
 ("use strict");
 
-//Brug til at retunere en parametre fra urlen
-const url_param_get = (key) => {
-  const url = new URL(window.location);
-  return url.searchParams.get(key);
-}
-
 //Brug til at sætte en parameter i urlen, key er navnet på parametren, value er hvad den indenholder
-const url_param = (key,value) => {
+function url_param (key,value) {
   const url = new URL(window.location);
   url.searchParams.set(key, value);
   window.history.pushState({}, '', url);
+}
+
+//Brug til at retunere en parametre fra urlen
+function url_param_get (key) {
+  const url = new URL(window.location);
+  return url.searchParams.get(key);
 }
 
 const recipesList = document.querySelector("#recipesList");
@@ -59,8 +59,10 @@ function showRecipes(arrayData) {
     recipesList.innerHTML += `<article class="card">
           <img src="https://cdn.dummyjson.com/recipe-images/${recipes.id}.webp" alt="" />
           <h4>${recipes.name}</h4>
-          <p>Tid: ${recipes.cookTimeMinutes + recipes.prepTimeMinutes} minutter</p>
-          <p> ${recipes.rating}<span class="star">★</span></p>
+          <div class="cardInformation">
+            <p>Time: ${recipes.cookTimeMinutes + recipes.prepTimeMinutes} min</p>
+            <p> ${recipes.rating}<span class="star">★</span></p>
+          </div>
           <div><button class="difficulty ${recipes.difficulty.toLowerCase()}">${recipes.difficulty}</button><button class="cuisine ${recipes.cuisine.toLowerCase().replace(" ", "-")}">${recipes.cuisine}</button></div>
           <button class="readMore"> <a href="enkelt_opskrift.html?id=${recipes.id}">Read More &#8594</a></button>
         </article>`;
