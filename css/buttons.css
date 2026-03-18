@@ -88,10 +88,13 @@ button.southasian.active {
   color: var(--bg-color);
 }
 
-button.easy, button.medium, button.hard, button.cuisine{
+button.easy,
+button.medium,
+button.hard,
+button.cuisine {
   border-radius: 20px;
   font-size: 14px;
-  font-weight: bold;  
+  font-weight: bold;
   color: white;
   border: 0px;
   padding: 0.5em;
@@ -110,19 +113,34 @@ button.cuisine {
   background-color: var(--european-main);
 }
 
-button.japanese, button.korean, button.thai, button.vietnamese, button.asian {
+button.japanese,
+button.korean,
+button.thai,
+button.vietnamese,
+button.asian {
   background-color: var(--asian-main);
 }
-button.italian, button.french, button.spanish{
+button.italian,
+button.french,
+button.spanish {
   background-color: var(--european-main);
 }
-button.greek, button.turkish, button.lebanese, button.moroccan, button.mediterranean {
+button.greek,
+button.turkish,
+button.lebanese,
+button.moroccan,
+button.mediterranean {
   background-color: var(--mediterranean-main);
 }
-button.indian, button.pakistani {
+button.indian,
+button.pakistani {
   background-color: var(--south-asian-main);
 }
-button.american, button.mexican, button.brazilian, button.cuban, button.hawaiian {
+button.american,
+button.mexican,
+button.brazilian,
+button.cuban,
+button.hawaiian {
   background-color: var(--american-main);
 }
 
@@ -151,11 +169,10 @@ button.readMore {
   border-radius: 20px;
   border: 3px solid var(--main-color);
   background-color: var(--bg-color);
+  margin-top: 1em;
   a {
     color: var(--main-color);
   }
-
-  margin-top: 1em;
 }
 
 button.readMore:hover {
